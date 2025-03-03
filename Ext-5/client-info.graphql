@@ -1,0 +1,41 @@
+# Точка входа в GraphQL-приложение
+schema {
+  query: Query
+}
+
+# Корневой тип запросов (Query)
+type Query {
+  # Позволяет получить данные конкретного клиента
+  # вместе с любыми нужными полями (id, documents, relatives и т.д.)
+  client(id: ID!): Client
+}
+
+# Описание типа "Клиент"
+type Client {
+  id: ID!
+  name: String
+  age: Int
+  
+  # Связанные документы (можно запрашивать только при необходимости)
+  documents: [Document]
+  
+  # Связанные родственники (также по желанию)
+  relatives: [Relative]
+}
+
+# Документы клиента
+type Document {
+  id: ID!
+  type: String
+  number: String
+  issueDate: String
+  expiryDate: String
+}
+
+# Родственники клиента
+type Relative {
+  id: ID!
+  relationType: String
+  name: String
+  age: Int
+}
